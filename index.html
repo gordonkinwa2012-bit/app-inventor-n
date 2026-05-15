@@ -1,8 +1,173 @@
-"Develop a professional, single-page responsive website for the '2026 樂齡「同理」編程設計大賽 – 心繫照護' competition using React or Tailwind CSS. The design must be modern, clean, and accessible, suitable for a school project and office presentation.Theme & Color Palette: Use a calming, trustworthy palette of deep navy (#0f172a), emerald green (#10b981), and soft slate gray (#f8fafc). Use high-quality typography (Inter or PingFang HK) and card-based layouts with subtle shadows.Content Structure (Mandatory - follow competition PDF rules):
-1. Hero Section: Title: '2026 樂齡「同理」編程設計大賽 – 心繫照護'. Subtitle: '從照護者視角出發—開發守護長者健康的貼心手機App'. CTA Button: 'Register Now (Deadline: 2026-04-17)'.
-2. Competition Rules: 2-5 students per team. Hardware: Must use iRED Smart Learning Suite (Health Kit & Sport Kit).
-3. The 10 App Ideas: Display as a 3-column grid of professional cards. Each card includes: Idea Name, Target User (Elderly/Caregiver), Hardware Used, and Tech Feasibility Note (e.g., 'Uses BluetoothClient and TinyDB').
-4. Important Dates: A clean vertical timeline: Registration (2026-04-17), Submission (2026-05-22), Finalists (2026-06-12), Final Presentation (2026-07-03).
-5. Scoring Table: Display the 5 criteria: UI/UX (30%), Programming (20%), Innovation (15%), Social Impact (15%), Presentation (20%).
-6. Submission Guidelines: Clearly list requirements for MIT App Inventor (.aia, .apk, 15-slide PDF) and iOS (Xcode .zip, 15-slide PDF).
-7. Footer: Contact via WhatsApp 9610 7184, email support@ired.com.hk, and a legal disclaimer for iReD Solutions Limited.  Technical Requirement: Ensure the UI is mobile-friendly and passes accessibility checks for elderly-related content (large buttons, high contrast)."Part 2: 10 Professional App Ideas (Technical Detail)These ideas are specifically designed to be feasible in MIT App Inventor and iOS (Swift) while focusing on the "Caregiver's perspective."#Idea NameHardwareCaregiver BenefitTechnical Suggestion1Fall Detection & GPS AlertSport KitReduces caregiver anxiety by sending instant SMS alerts with GPS coordinates if a fall is detected.  2Smart Pill RemindersHealth KitCaregivers get a "Missed Dose" notification if the elderly doesn't interact with the hardware.  Use Clock component and hardware LED to flash when medication is due.3Weekly Mood & Vitals ReportHealth KitAggregates heart rate and self-reported mood into a weekly trend report for the caregiver.  Use TinyDB to store daily stats and Canvas to draw trend graphs.4Rehab Exercise CoachSport KitGamifies physical therapy; caregivers can remotely view "Rep Counts" to track progress.  Use OrientationSensor to detect movement patterns for joint exercises.5Hydration MonitoringHealth KitTracks water intake via touch sensors; suggests soft-food recipes based on local weather.  Integrate Web component to fetch weather API and adjust hydration goals.6Caregiver Stress ReliefHealth KitUses biofeedback (heart rate) to detect caregiver burnout and suggests guided breathing exercises.  Use the pulse sensor for biofeedback and Sound for relaxation music.7Voice-Activated SOSSport KitTriggers an emergency call when the elderly shouts "Help" or presses a physical button.  Use SpeechRecognizer and PhoneCall components for hands-free aid.8Sleep Pattern TrackerSport KitMonitors movement during sleep; provides tips for both parties to improve rest quality.  Use micro-accelerometer data to analyze "Restless" vs "Quiet" sleep cycles.9Easy Video ConnectHealth KitA one-touch interface for video calls; caregivers can trigger an "Auto-Answer" for safety checks.  Use ActivityStarter to launch WhatsApp or FaceTime video calls instantly.10Balance & Stability TestSport KitMeasures walking "wobble" and gives a daily stability score to predict fall risks.  Use Accelerometer X/Y axis data to calculate deviation from a straight line.
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 樂齡「同理」編程設計大賽 – 心繫照護</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', "PingFang HK", sans-serif; background-color: #f8fafc; }
+        .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="hero-gradient text-white py-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">2026 樂齡「同理」編程設計大賽</h1>
+            <p class="text-xl md:text-2xl text-emerald-400 font-semibold mb-6">「從照護者視角出發 — 開發守護長者健康的貼心手機 App」</p>
+            <p class="text-slate-300 mb-8 max-w-2xl mx-auto">結合 Smart Learning Suite | Health Kit & Sport Kit，以同理心為核心，為長者與照護者打造更好的生活品質。</p>
+            <a href="https://wa.me/85296107184" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
+                立即報名 (截止日期：2026-04-17)
+            </a>
+        </div>
+    </header>
+
+    <section class="py-16 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b-2 border-emerald-500 pb-2 inline-block">參賽對象與組別</h2>
+                <ul class="space-y-3 mt-4">
+                    <li class="flex items-start"><span class="text-emerald-500 mr-2">●</span> <strong>小學組：</strong> 2-5人一隊，僅限使用 MIT App Inventor [cite: 2, 5]</li>
+                    <li class="flex items-start"><span class="text-emerald-500 mr-2">●</span> <strong>中學組：</strong> 2-5人一隊，可選 MIT App Inventor 或 iOS (Swift) [cite: 2, 5]</li>
+                    <li class="flex items-start"><span class="text-emerald-500 mr-2">●</span> <strong>必備硬體：</strong> 作品必須連結 Health Kit 或 Sport Kit 硬體 [cite: 2, 3]</li>
+                </ul>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b-2 border-emerald-500 pb-2 inline-block">重要日期</h2>
+                <div class="space-y-4 mt-4">
+                    <div class="flex justify-between border-b border-slate-100 pb-2"><span>報名截止</span><span class="font-semibold">2026-04-17</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-2"><span>作品遞交截止</span><span class="font-semibold">2026-05-22</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-2"><span>入圍公佈</span><span class="font-semibold">2026-06-12</span></div>
+                    <div class="flex justify-between font-bold text-emerald-600"><span>決賽及頒獎禮</span><span>2026-07-03</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-100 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">10 大專業 App 提案 (MIT App Inventor 可行方案)</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">1. 跌倒偵測與智慧預警</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Sport Kit</strong>。當偵測到跌倒，App 自動向照護者發送包含 GPS 位置的簡訊。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: AccelerometerSensor, Texting, GPS</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">2. 服藥伴侶與物理提醒</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Health Kit</strong>。硬體準時閃爍提醒；若長者未服用，照護者會收到「漏藥通知」。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: Clock Component, BluetoothClient</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">3. 每日心情與健康追蹤</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Health Kit</strong>。紀錄心率與長者心情，生成每週報告，幫助照護者預測健康變化。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: Heart Rate Sensor, TinyDB</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">4. 關節健康運動教練</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Sport Kit</strong>。追蹤肢體擺動次數，提供語音鼓勵。照護者可遠端查閱進度。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: OrientationSensor, TextToSpeech</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">5. 水分與營養管家</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Health Kit</strong>。監測飲水量，當攝取不足時提醒照護者提供適合的軟食建議。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: Web Component (Weather API)</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">6. 照護者壓力觀測站</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Health Kit</strong>。監測照護者心率，檢測壓力水平並引導深呼吸練習。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: Biofeedback, Pulse Sensor</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">7. 聲控緊急呼救</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Sport Kit</strong>。長者喊出「救命」或按鈕，自動撥打電話並發送錄音。 [cite: 7]</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: SpeechRecognizer, PhoneCall</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">8. 睡眠質量監測儀</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Sport Kit</strong>。置於床邊監測翻身頻率，為照護者提供睡眠質量數據改善建議。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: Micro-accelerometer data</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">9. 簡易視訊連心</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Health Kit</strong>。一鍵式超大視訊按鈕，支援照護者遠端啟動安全性檢查。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: ActivityStarter (WhatsApp/FaceTime)</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-2 text-slate-900">10. 平衡與穩定度測試</h3>
+                    <p class="text-sm text-slate-600 mb-4">使用 <strong>Sport Kit</strong>。監測行走重心，若不穩則發出警示以預防跌倒風險。</p>
+                    <div class="text-xs bg-slate-100 p-2 rounded text-slate-500 font-mono">技術點: X/Y Axis Calculation</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-6 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-8">評分準則</h2>
+        <div class="overflow-hidden rounded-xl border border-slate-200">
+            <table class="w-full text-left bg-white">
+                <thead class="bg-slate-50 border-b border-slate-200">
+                    <tr>
+                        <th class="px-6 py-4 font-bold">準則項目</th>
+                        <th class="px-6 py-4 font-bold">佔比</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr><td class="px-6 py-4">UI/UX 設計 (吸引力、導覽、適合受眾) [cite: 6]</td><td class="px-6 py-4 font-bold">30%</td></tr>
+                    <tr><td class="px-6 py-4">程式設計 (計算準確、代碼效率) [cite: 10]</td><td class="px-6 py-4 font-bold">20%</td></tr>
+                    <tr><td class="px-6 py-4">創新與創造力 (獨特性、硬體運用) [cite: 10]</td><td class="px-6 py-4 font-bold">15%</td></tr>
+                    <tr><td class="px-6 py-4">社會影響 (提升生活品質、滿足需求) [cite: 10]</td><td class="px-6 py-4 font-bold">15%</td></tr>
+                    <tr><td class="px-6 py-4">演講表現 (清晰度、演講風格、時間管理) [cite: 10]</td><td class="px-6 py-4 font-bold">20%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="py-16 bg-orange-50 px-6">
+        <div class="max-w-4xl mx-auto border-2 border-dashed border-orange-200 rounded-3xl p-10">
+            <h2 class="text-2xl font-bold text-orange-800 mb-6">遞交作品要求</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-orange-900 mb-2">MIT App Inventor 組</h3>
+                    <ul class="text-orange-800 space-y-2 list-disc pl-5">
+                        <li>作品簡報 (不多於15頁PDF) [cite: 3]</li>
+                        <li>Android 檔案 (.aia 及 .apk) [cite: 3]</li>
+                        <li>5分鐘介紹影片連結 (選填) [cite: 3]</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-orange-900 mb-2">iOS 組 (中學組適用)</h3>
+                    <ul class="text-orange-800 space-y-2 list-disc pl-5">
+                        <li>作品簡報 (不多於15頁PDF) [cite: 3]</li>
+                        <li>Xcode 專案壓縮檔 (.zip) [cite: 3]</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-8 text-sm text-orange-700 italic font-semibold italic">截止日期：2026年5月22日 [cite: 5]</p>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 text-center">
+        <p class="mb-2">主辦單位：iReD Solutions Limited [cite: 1]</p>
+        <p class="mb-6 italic">iReD Solutions Limited 保留所有有關比賽事項的最終決定權。 [cite: 14]</p>
+        <div class="flex justify-center space-x-6">
+            <a href="https://wa.me/85296107184" class="hover:text-white">WhatsApp: 9610 7184 [cite: 14]</a>
+            <a href="mailto:support@ired.com.hk" class="hover:text-white">Email: support@ired.com.hk [cite: 6]</a>
+        </div>
+    </footer>
+
+</body>
+</html>
